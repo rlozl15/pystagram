@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from users.forms import LoginForm
-from django.contrib import messages
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -23,7 +22,8 @@ def login_view(request):
                 login(request, user)
                 return redirect("/posts/feeds/")
             else:
-                messages.error(request, "실패했습니다.")
+                # form에 에러를 추가
+                form.add_error(None, "해당하는 사용자가 없습니다.")
     else:
         form = LoginForm()
 
