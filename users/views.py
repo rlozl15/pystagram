@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from users.forms import LoginForm
+from users.forms import LoginForm, SignupForm
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -36,3 +36,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/users/login/")
+
+def signup(request):
+    form = SignupForm()
+    context = {
+        "form": form
+    }
+    return render(request, "users/signup.html", context)

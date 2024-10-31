@@ -1,0 +1,17 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+	<div id="signup">
+		<form method = "POST" enctype="multipart/form-data">
+			<h1>Sign up</h1>
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit" class="btn btn-signup">회원가입</button>
+		</form>
+	</div>
+</body>
+</html>
