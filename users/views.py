@@ -42,27 +42,15 @@ def signup(request):
     if request.method == "POST":
         form = SignupForm(data=request.POST, files=request.FILES)
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            password1 = form.cleaned_data["password1"]
-            password2 = form.cleaned_data["password2"]
-            profile_image = form.cleaned_data["profile_image"]
-            short_description = form.cleaned_data["short_description"]
-
-            user = User.objects.create_user(
-                username=username,
-                password=password1,
-                profile_image=profile_image,
-                short_description=short_description,
-            )
+            # form 내용을 바탕으로 사용자 객체 저장
+            user = form.save()
             login(request, user)
             return redirect("/posts/feeds/")
 
-        # 에러가 있는 경우 회원가입 페이지로 이동
-        else:
-            context = {"form": form}
-            return render(request, "users/signup.html", context)
     # GET
     else:
         form = SignupForm()
-        context = { "form": form }
-        return render(request, "users/signup.html", context)
+
+    # GET 요청이면 빈 form, 유효하지 않으면 에러를 포함한 form이 전달됨
+    context = {"form": form}
+    return render(request, "users/signup.html", context)
