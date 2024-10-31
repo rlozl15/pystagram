@@ -1,5 +1,5 @@
 from django import forms
-form django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError
 from users.models import User
 
 class LoginForm(forms.Form):

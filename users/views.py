@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from users.forms import LoginForm, SignupForm
-from users.models import User
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -46,8 +45,7 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect("/posts/feeds/")
-
-    # GET
+    # GET 요청
     else:
         form = SignupForm()
 
