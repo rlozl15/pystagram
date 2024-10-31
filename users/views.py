@@ -48,29 +48,20 @@ def signup(request):
             profile_image = form.cleaned_data["profile_image"]
             short_description = form.cleaned_data["short_description"]
 
-            # 비밀번호와 비밀번호 확인값이 같은가
-            if password1 != password2:
-                form.add_error("password2", "비밀번호 확인 값이 다릅니다.")
+            user = User.objects.create_user(
+                username=username,
+                password=password1,
+                profile_image=profile_image,
+                short_description=short_description,
+            )
+            login(request, user)
+            return redirect("/posts/feeds/")
 
-            # username을 가진 사용자가 있는가
-            if User.objects.filter(username=username).exists():
-                form.add_error("username", "입력한 사용자명은 이미 사용중입니다.")
-
-            # 에러가 존재한다면 에러를 포함한 form을 회원가입 페이지에 렌더링
-            if form.errors:
-                context = {"form": form}
-                return render(request, "users/signup.html", context)
-            # 에러가 없다면 사용자 생성하고 로그인 처리 후 피드 페이지로 이동
-            else:
-                user = User.objects.create_user(
-                    username=username,
-                    password=password1,
-                    profile_image=profile_image,
-                    short_description=short_description,
-                )
-                login(request, user)
-                return redirect("/posts/feeds/")
-
+        # 에러가 있는 경우 회원가입 페이지로 이동
+        else:
+            context = {"form": form}
+            return render(request, "users/signup.html", context)
+    # GET
     else:
         form = SignupForm()
         context = { "form": form }
