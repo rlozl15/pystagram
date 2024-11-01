@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 	<nav>
-		<h1><a href="/posts/feeds/"> Pystagram </a></h1>
-		<a href="/users/logout/"> Logout </a>
+		<h1><a href="{% url 'posts:feeds' %}"> Pystagram </a></h1>
+		<a href="{% url 'users:logout' %}"> Logout </a>
 	</nav>
 	<div id="post-add">
 		<h1>Post 작성</h1>

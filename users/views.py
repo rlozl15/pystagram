@@ -4,7 +4,7 @@ from users.forms import LoginForm, SignupForm
 
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect("/posts/feeds/")
+        return redirect("posts:feeds")
 
     if request.method == "POST":
         form = LoginForm(data=request.POST)
@@ -20,7 +20,7 @@ def login_view(request):
             # 사용자가 있다면 로그인 처리
             if user:
                 login(request, user)
-                return redirect("/posts/feeds/")
+                return redirect("posts:feeds")
             else:
                 # form에 에러를 추가
                 form.add_error(None, "해당하는 사용자가 없습니다.")
@@ -35,7 +35,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/users/login/")
+    return redirect("users:login")
 
 def signup(request):
     if request.method == "POST":
@@ -44,7 +44,7 @@ def signup(request):
             # form 내용을 바탕으로 사용자 객체 저장
             user = form.save()
             login(request, user)
-            return redirect("/posts/feeds/")
+            return redirect("posts:feeds")
     # GET 요청
     else:
         form = SignupForm()

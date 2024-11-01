@@ -3,11 +3,12 @@ from posts.models import Post, Comment, PostImage
 from posts.forms import CommentForm, PostForm
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.urls import reverse
 
 def feeds(request):
     # 로그인 되어 있지 않으면 로그인 페이지로 이동
     if not request.user.is_authenticated:
-        return redirect("/users/login/")
+        return redirect("users:login")
 
     # 모든 글 목록 전달
     posts = Post.objects.all()
@@ -28,14 +29,16 @@ def comment_add(request):
         comment.user = request.user
         # DB에 저장
         comment.save()
-        return HttpResponseRedirect(f"/posts/feeds/#post-{comment.post.id}")
+        url = reverse("posts:feeds") + f"#post-{comment.post.id}"
+        return HttpResponseRedirect(url)
 
 @require_POST
 def comment_delete(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     if comment.user == request.user:
         comment.delete()
-        return HttpResponseRedirect(f"/posts/feeds/#post-{comment.post.id}")
+        url = reverse("posts:feeds") + f"#post-{comment.post.id}"
+        return HttpResponseRedirect(url)
     return HttpResponseForbidden("이 댓글을 삭제할 권한이 없습니다.")
 
 def post_add(request):
@@ -53,7 +56,7 @@ def post_add(request):
                     photo=image_file,
                 )
 
-            url = f'/posts/feeds/#post-{post.id}'
+            url = reverse("posts:feeds") + f"#post-{post.id}"
             return HttpResponseRedirect(url)
     else:
         form = PostForm()
