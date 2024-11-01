@@ -34,6 +34,11 @@
 				<!-- 글 내용 -->
 				<div class="post-content">
 					{{ post.content|linebreaksbr }}
+					<div class="post-tags">
+						{% for tag in post.tags.all %}
+							<span>#{{tag.name}}</span>
+						{% endfor %}
+					</div>
 				</div>
 				
 				<!-- 좋아요, 댓글수 -->
