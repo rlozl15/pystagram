@@ -29,16 +29,16 @@ def comment_add(request):
         comment.user = request.user
         # DB에 저장
         comment.save()
-        url = reverse("posts:feeds") + f"#post-{comment.post.id}"
-        return HttpResponseRedirect(url)
+        url_next = request.GET.get("next")
+        return HttpResponseRedirect(url_next)
 
 @require_POST
 def comment_delete(request, comment_id):
     comment = Comment.objects.get(id=comment_id)
     if comment.user == request.user:
         comment.delete()
-        url = reverse("posts:feeds") + f"#post-{comment.post.id}"
-        return HttpResponseRedirect(url)
+        url_next = request.GET.get("next")
+        return HttpResponseRedirect(url_next)
     return HttpResponseForbidden("이 댓글을 삭제할 권한이 없습니다.")
 
 def post_add(request):
