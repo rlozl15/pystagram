@@ -2,9 +2,7 @@
 {% block content %}
 	{% include 'nav.html' %}
 	<div id="feeds" class="post-container">
-		{% for post in posts %}
-			{% include 'posts/post.html' %}
-		{% endfor %}
+		{% include 'posts/post.html' %}
 	</div>
 	
 	<script>
