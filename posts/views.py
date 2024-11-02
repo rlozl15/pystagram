@@ -92,3 +92,17 @@ def post_detail(request, post_id):
         "comment_form": comment_form,
     }
     return render(request, "posts/post_detail.html", context)
+
+def post_like(request, post_id):
+    post = Post.objects.get(id=post_id)
+    user = request.user
+
+    # 좋아요 해제
+    if user.like_post.filter(id=post.id).exists():
+        user.like_post.remove(post)
+    # 좋아요 추가
+    else:
+        user.like_post.add(post)
+
+    url_next = request.GET.get("next")
+    return HttpResponseRedirect(url_next)
