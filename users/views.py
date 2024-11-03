@@ -1,3 +1,5 @@
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from users.forms import LoginForm, SignupForm
@@ -61,3 +63,37 @@ def profile(request, user_id):
         "user":user
     }
     return render(request,"users/profile.html", context)
+
+def followers(request,user_id):
+    user = get_object_or_404(User, id=user_id)
+    relationships = user.follower_relationships.all()
+    context = {
+        "user":user,
+        "relationships":relationships,
+    }
+    return render(request, "users/followers.html", context)
+
+def following(request,user_id):
+    user = get_object_or_404(User, id=user_id)
+    relationships = user.following_relationships.all()
+    context = {
+        "user":user,
+        "relationships":relationships,
+    }
+    return render(request, "users/following.html", context)
+
+def follow(request, user_id):
+    # 로그인한 사용자
+    user = request.user
+    # 로그인한 사용자가 팔로우 하려는 사용자
+    target_user = get_object_or_404(User, id=user_id)
+
+    # 이미 팔로잉 중이면 제거
+    if target_user in user.following.all():
+        user.following.remove(target_user)
+
+    else:
+        user.following.add(target_user)
+
+    url_next = request.GET.get("next") or reverse("user:profile",args=[user.id])
+    return HttpResponseRedirect(url_next)
