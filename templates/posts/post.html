@@ -1,9 +1,11 @@
 <article id="post-{{post.id}}" class="post">
 	<header class="post-header">
-		{% if post.user.profile_image %}
-			<img src="{{ post.user.profile_image.url }}">
-		{% endif %}
-		<span>{{ post.user.username }}</span>
+		<a href="{% url 'users:profile' user_id=post.user.id %}">
+			{% if post.user.profile_image %}
+				<img src="{{ post.user.profile_image.url }}">
+			{% endif %}
+			<span>{{ post.user.username }}</span>
+		</a>
 	</header>
 	
 	<!-- 이미지 슬라이드 영역 시작 -->
@@ -13,7 +15,7 @@
 				{% for image in post.postimage_set.all %}
 					{% if image.photo %}
 					<li class="splide__slide">
-						<img src="{{ image.photo.url }}">
+						<img src="{{ image.photo.url }}" class="square-image">
 					</li>
 					{% endif %}
 				{% endfor %}

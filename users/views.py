@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from users.forms import LoginForm, SignupForm
+from users.models import User
+
 
 def login_view(request):
     if request.user.is_authenticated:
@@ -52,3 +54,10 @@ def signup(request):
     # GET 요청이면 빈 form, 유효하지 않으면 에러를 포함한 form이 전달됨
     context = {"form": form}
     return render(request, "users/signup.html", context)
+
+def profile(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    context = {
+        "user":user
+    }
+    return render(request,"users/profile.html", context)
