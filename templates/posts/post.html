@@ -1,9 +1,25 @@
 <article id="post-{{post.id}}" class="post">
 	<header class="post-header">
-		{% if post.user.profile_image %}
-			<img src="{{ post.user.profile_image.url }}">
+		<a href="{% url 'users:profile' user_id=post.user.id %}">
+			{% if post.user.profile_image %}
+				<img src="{{ post.user.profile_image.url }}">
+			{% endif %}
+			<span>{{ post.user.username }}</span>
+		</a>
+		
+		<!-- 작성자가 본인이면 팔로우 버튼 표기하지 않음 -->
+		{% if user != post.user %}
+			<form action="{% url 'users:follow' user_id=post.user.id %}?next={{action_redirect_url}}" method="POST">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-primary">
+					{% if post.user in user.following.all %}
+						Unfollow
+					{% else %}
+						Follow
+					{% endif %}
+				</button>
+			</form>
 		{% endif %}
-		<span>{{ post.user.username }}</span>
 	</header>
 	
 	<!-- 이미지 슬라이드 영역 시작 -->
