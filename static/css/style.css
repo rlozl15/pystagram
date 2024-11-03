@@ -263,9 +263,6 @@ article.post header.post-header a {
 }
 article.post header.post-header img {
   height: 32px;
-  aspect-ratio: 1/1;
-  object-fit: cover; /* 이미지가 정사각형 안에 꽉 차도록 */
-  overflow: hidden;
   border-radius: 50%;
   border: 1px solid #eee;
   box-sizing: border-box;
@@ -569,7 +566,7 @@ body > nav > a {
   display: flex;
 }
 .post-grid-container .post-grid img {
-  width: 100%;
+  min-width: 100%;
   object-fit: cover;
   object-position: center center;
 }
@@ -579,12 +576,4 @@ body > nav > a {
 }
 #tags .tags-header {
   margin-bottom: 10px;
-}
-
-.square-image {
-    display: flex;
-    width: calc(100vw - (100vw - 100%));
-    aspect-ratio: 1/1;
-    object-fit: cover; /* 이미지가 정사각형 안에 꽉 차도록 */
-    overflow: hidden;
 }

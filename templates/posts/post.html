@@ -13,7 +13,7 @@
 				{% for image in post.postimage_set.all %}
 					{% if image.photo %}
 					<li class="splide__slide">
-						<img src="{{ image.photo.url }}" class="square-image">
+						<img src="{{ image.photo.url }}">
 					</li>
 					{% endif %}
 				{% endfor %}
