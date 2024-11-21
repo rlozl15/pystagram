@@ -1,0 +1,118 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "username": "john_lee",
+      "password": "pbkdf2_sha256$600000$opjiYtSXjytZN1GAeZbaKq$aaQGRHRlsIlmgqHZN8VH+JjORTyq/A8lrWuemfM8Vgk=",
+      "email": "john@example.com",
+      "profile_image": "users/profile/austria.jpg",
+      "short_description": "안녕하세요, John입니다.",
+      "like_post": [2],
+      "following": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "username": "jane_doe",
+      "password": "pbkdf2_sha256$600000$VUEtSB4avYl5DZ5gvQqnTB$/X8ezpe2kAp16a4CMIR8kua2NFOgt5JsrCMTe2YcL98=",
+      "email": "jane@example.com",
+      "profile_image": "users/profile/cat.jpg",
+      "short_description": "안녕하세요, Jane입니다.",
+      "like_post": [],
+      "following": [1]
+    }
+  },
+  {
+    "model": "posts.post",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "content": "호수",
+      "created": "2024-11-01T12:00:00Z",
+      "tags": [1,2]
+    }
+  },
+  {
+    "model": "posts.post",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "content": "봄이 왔어요",
+      "created": "2024-04-02T14:30:00Z",
+      "tags": [1]
+    }
+  },
+  {
+    "model": "posts.postimage",
+    "pk": 1,
+    "fields": {
+      "post": 1,
+      "photo": "post/hallstatt.jpg"
+    }
+  },
+  {
+    "model": "posts.postimage",
+    "pk": 2,
+    "fields": {
+      "post": 2,
+      "photo": "post/spring.jpg"
+    }
+  },
+  {
+    "model": "posts.postimage",
+    "pk": 3,
+    "fields": {
+      "post": 2,
+      "photo": "post/insect.jpg"
+    }
+  },
+  {
+    "model": "posts.postimage",
+    "pk": 4,
+    "fields": {
+      "post": 2,
+      "photo": "post/flower.jpg"
+    }
+  },
+  {
+    "model": "posts.comment",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "post": 1,
+      "content": "Good",
+      "created": "2024-11-01T12:30:00Z"
+    }
+  },
+  {
+    "model": "posts.hashtag",
+    "pk": 1,
+    "fields": {
+      "name": "할슈타트"
+    }
+  },
+  {
+    "model": "posts.hashtag",
+    "pk": 2,
+    "fields": {
+      "name": "호수"
+    }
+  },
+  {
+    "model": "posts.hashtag",
+    "pk": 3,
+    "fields": {
+      "name": "봄"
+    }
+  },
+  {
+    "model": "posts.hashtag",
+    "pk": 4,
+    "fields": {
+      "name": "꽃"
+    }
+  }
+]
