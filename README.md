@@ -26,35 +26,35 @@
 - 컨테이너: Docker
 
 ## 설정 및 실행
-1. 저장소 클론
-```bash
-git clone https://github.com/rlozl15/pystagram.git
-cd pystagram
-```
-2. Docker 환경 준비
+1. **저장소 클론**
+    ```bash
+    git clone https://github.com/rlozl15/pystagram.git
+    cd pystagram
+    ```
+2. **Docker 환경 준비**
     - Docker Desktop을 실행합니다.
-3. Docker 이미지 빌드 및 실행
-```
-docker-compose up -d --build
-```
-4. Django 앱 마이그레이션
-```
-docker-compose exec django-service python manage.py migrate
-```
-5. 블로그 데이터 임의 추가
-```
-docker-compose exec django-service python manage.py loaddata data.json
-```
+3. **Docker 이미지 빌드 및 실행**
+    ```
+    docker-compose up -d --build
+    ```
+4. **Django 앱 마이그레이션**
+    ```
+    docker-compose exec django-service python manage.py migrate
+    ```
+5. **블로그 데이터 임의 추가**
+    ```
+    docker-compose exec django-service python manage.py loaddata data.json
+    ```
   - 기본 계정 데이터
       - username: john_lee
       - password: 0000
-6. Django 서버 확인
+6. **Django 서버 확인**
     - http://localhost:8000에서 Django 애플리케이션에 접근할 수 있습니다.
-7. 관리자 계정 생성
+7. **관리자 계정 생성**
     - 필요시 admin 페이지 확인을 위해 superuser를 생성해야 합니다.
-```
-docker-compose exec django-service python manage.py createsuperuser
-```  
+    ```
+    docker-compose exec django-service python manage.py createsuperuser
+    ```  
 
 ## 이미지 출처
 - 이미지는 [Pixabay](https://pixabay.com/)에서 다운받았습니다.
