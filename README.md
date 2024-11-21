@@ -55,6 +55,9 @@
     ```
     docker-compose exec django-service python manage.py createsuperuser
     ```  
+![pystagram](src/pystagram.png)
+![post_create](src/post_create.png)
+![profile](src/profile.png)
 
 ## 이미지 출처
 - 이미지는 [Pixabay](https://pixabay.com/)에서 다운받았습니다.
