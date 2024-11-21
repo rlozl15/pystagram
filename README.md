@@ -60,4 +60,4 @@
 ![profile](src/profile.png)
 
 ## 이미지 출처
-- 이미지는 [Pixabay](https://pixabay.com/)에서 다운받았습니다.
+- src의 이미지는 [Pixabay](https://pixabay.com/)에서 다운받았습니다.
